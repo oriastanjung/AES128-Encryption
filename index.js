@@ -5,9 +5,9 @@ const { subBytes } = require("./ekspansiKey/sBoxSubtitusion");
 const plainText = "CINDY TRI ANTIKA";
 const arrayHex = stringToHexArray(plainText);
 
-const key = "SMKHARAPANBANGSA";
+const key = "FTTKUMRAHBERJAYA";
 const keyHexArray = stringToHexArray(key);
-
+console.log(keyHexArray)
 // 1. menambahkan XOR plaintext dengan roundkey 0
 function xorMatrices(matrix1, matrix2) {
   if (

@@ -20,9 +20,21 @@ function hexXOR(hex1, hex2) {
   return resultHex;
 }
 
-function makeRoundKey(inputARR) {
+function makeRoundKey(inputARR, rconKe = 0) {
   // jika pertama kali kolomnya, maka diterapkan XOR dengan Round Constant (RCon) dari hasil ROTWORD yang telah di SBox kan
-  const RCON = ["01", "00", "00", "00"];
+  const RCON = [
+    ["01", "00", "00", "00"],
+    ["02", "00", "00", "00"],
+    ["04", "00", "00", "00"],
+    ["08", "00", "00", "00"],
+    ["10", "00", "00", "00"],
+    ["20", "00", "00", "00"],
+    ["40", "00", "00", "00"],
+    ["80", "00", "00", "00"],
+    ["1B", "00", "00", "00"],
+    ["36", "00", "00", "00"],
+  ];
+
   const lastColumnRotWord = rotWord(inputARR, 4);
   const lastColumnRotWordSBox = sboxOneDimensionalArray(lastColumnRotWord);
   // console.log(tekeColumnArrayAs1D(inputARR,1))
@@ -33,7 +45,7 @@ function makeRoundKey(inputARR) {
   // khusus colom 1 kita perlu Rcon
   for (let i = 0; i < 4; i++) {
     const hexXORInit = hexXOR(wi_4[i], lastColumnRotWordSBox[i]);
-    wi[i] = hexXOR(hexXORInit, RCON[i]);
+    wi[i] = hexXOR(hexXORInit, RCON[rconKe][i]);
   }
 
   const kolom1 = [...wi];
@@ -70,20 +82,19 @@ function makeRoundKey(inputARR) {
     [kolom1[0], kolom2[0], kolom3[0], kolom4[0]],
     [kolom1[1], kolom2[1], kolom3[1], kolom4[1]],
     [kolom1[2], kolom2[2], kolom3[2], kolom4[2]],
-    [kolom1[3], kolom2[2], kolom3[3], kolom4[3]],
+    [kolom1[3], kolom2[3], kolom3[3], kolom4[3]],
   ];
 
-  return output
+  return output;
 }
-const round1 = makeRoundKey(inputArray)
-const round2 = makeRoundKey(round1)
-const round3 = makeRoundKey(round2)
+const round1 = makeRoundKey(inputArray);
+const round2 = makeRoundKey(round1);
+const round3 = makeRoundKey(round2);
 // console.log("roundkey 1 >> ", round1)
 // console.log("roundkey 2 >> ", round2)
 // console.log("roundkey 3 >> ", round3)
 
-
 module.exports = {
-    makeRoundKey,
-    hexXOR
-}
+  makeRoundKey,
+  hexXOR,
+};
