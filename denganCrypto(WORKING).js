@@ -12,13 +12,12 @@ var key = CryptoJS.enc.Hex.parse(keyHex);
 
 // Pilih mode operasi dan padding
 var mode = CryptoJS.mode.ECB;
-var padding = CryptoJS.pad.Pkcs7;
 
 // Buat objek parameter untuk konfigurasi enkripsi/dekripsi
-var params = { mode: mode, padding: padding };
+var params = { mode: mode };
 
 // Enkripsi teks ke dalam bentuk hex
-const data = {nama : "oriastanjungpinang keren sekali" , nik : 21720428194124}
+const data = "CINDY TRI ANTIKA"
 var plaintext = JSON.stringify(data);
 console.log(plaintext)
 var encrypted = CryptoJS.AES.encrypt(plaintext, key, params);

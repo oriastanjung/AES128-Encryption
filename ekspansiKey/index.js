@@ -3,7 +3,7 @@ const { makeRoundKey } = require("./membuatRoundKey");
 
 const inputText = "FTTKUMRAHBERJAYA";
 const resultArray = stringToHexArray(inputText);
-console.log(resultArray)
+// console.log(resultArray)
 const round1 = makeRoundKey(resultArray);
 const round2 = makeRoundKey(round1,1);
 const round3 = makeRoundKey(round2,2);
@@ -25,5 +25,19 @@ console.log("roundkey 6 >> ", round6);
 console.log("roundkey 7 >> ", round7);
 console.log("roundkey 8 >> ", round8);
 console.log("roundkey 9 >> ", round9);
-console.log("roundkey 10 >> ", round10);
+// console.log("roundkey 10 >> ", round10);
 
+
+
+module.exports = {
+    round1,
+    round2,
+    round3,
+    round4,
+    round5,
+    round6,
+    round7,
+    round8,
+    round9,
+    round10,
+}
